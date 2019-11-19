@@ -30,6 +30,9 @@ let args = process.argv.slice(2);
 
 let amount, originalCurrency, targetCurrency;
 
+/*const USD = 1.11;
+const NZD = 1.75;*/
+
 if (args.length < 3) {
   console.log('Error: Not enough input arguments given!');
 } else {
@@ -37,3 +40,46 @@ if (args.length < 3) {
   originalCurrency = args[1];
   targetCurrency = args[2];
 }
+
+/*let Ergebnis
+
+if ((originalCurrency === 'USD') && (targetCurrency === 'EUR')) {
+  Ergebnis = amount / USD;
+} else if ((originalCurrency === 'NZD') && (targetCurrency === 'EUR')) {
+  Ergebnis = amount / NZD;
+} else if ((originalCurrency === 'EUR') && (targetCurrency === 'USD')) {
+  Ergebnis = amount * USD;
+} else if ((originalCurrency === 'NZD') && (targetCurrency === 'USD')) {
+  Ergebnis = amount * USD;
+} else if ((originalCurrency === 'EUR') && (targetCurrency === 'NZD')) {
+  Ergebnis = amount * NZD;
+} else if ((originalCurrency === 'USD') && (targetCurrency === 'NZD')) {
+  Ergebnis = amount * NZD;
+} else {
+  Ergebnis = 'Error'
+}
+
+
+console.log(Ergebnis + targetCurrency); */
+
+let currencies = {
+  EUR: {value: 1, symbol: ' €'},
+  USD: {value: 1.11, symbol: ' $'},
+  NZD: {value: 1.75, symbol: ' $ NZ'},
+  SEK: {value: 10.65, symbol: ' kr'},
+  LKR: {value: 198.57, symbol: ' Rs'},
+  VND: {value: 25.688, symbol: ' ₫'},
+  CLP: {value: 866.26, symbol: ' chil. $'}
+}
+
+let output = 1 / currencies[originalCurrency].value * [amount] * currencies[targetCurrency].value
+console.log('Das Ergebnis ist: ' + output + currencies[targetCurrency].symbol);
+
+/*let currencies = {EUR: 1, USD: 1.11, NZD: 1.75, SEK: 10.65, LKR:198.57, VND: 25.688, CLP: 866.26,
+symbols: {EUR: ' €', USD: ' $', NZD: ' $ NZ', SEK: ' kr', LKR: ' Rs', VND: ' ₫', CLP: ' chil. $'}
+}
+let output = 1 / currencies[originalCurrency] * [amount] * currencies[targetCurrency]
+
+
+console.log('Das Ergebnis ist: ' + output + currencies.symbols[targetCurrency]);*/
+
