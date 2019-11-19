@@ -1,3 +1,4 @@
+
 /*
  * CURRENCY CONVERTER RELOADED
  * Author: <your name here>
@@ -71,6 +72,20 @@ let currencies = {
   VND: {value: 25.688, symbol: ' ₫'},
   CLP: {value: 866.26, symbol: ' chil. $'}
 }
+
+const request = require('request');
+request('https://api.exchangeratesapi.io/latest', function (error, response, body) {
+  console.error('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  console.log('body:', body);
+  let bodyObj = JSON.parse(body);
+  for (let field in bodyObj.rates) {
+    console.log(field);
+    console.log(bodyObj.rates[field])
+  }
+});
+
+
 
 let output = 1 / currencies[originalCurrency].value * [amount] * currencies[targetCurrency].value
 console.log('Das Ergebnis ist: ' + output + currencies[targetCurrency].symbol);
