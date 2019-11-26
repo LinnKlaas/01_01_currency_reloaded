@@ -80,15 +80,19 @@ request('https://api.exchangeratesapi.io/latest', function (error, response, bod
   console.log('body:', body);
   let bodyObj = JSON.parse(body);
   for (let field in bodyObj.rates) {
+    if (currencies.hasOwnProperty(field) === true) {
+      currencies[field].value = bodyObj.rates[field];
+    } else if (currencies.hasOwnProperty(field) === false) {
+      currencies[field] = {};
+      currencies[field].value = bodyObj.rates[field];
+    }
     console.log(field);
     console.log(bodyObj.rates[field])
   }
+  let output = 1 / currencies[originalCurrency].value * [amount] * currencies[targetCurrency].value
+  console.log('Das Ergebnis ist: ' + output + currencies[targetCurrency]);
 });
 
-
-
-let output = 1 / currencies[originalCurrency].value * [amount] * currencies[targetCurrency].value
-console.log('Das Ergebnis ist: ' + output + currencies[targetCurrency].symbol);
 
 /*let currencies = {EUR: 1, USD: 1.11, NZD: 1.75, SEK: 10.65, LKR:198.57, VND: 25.688, CLP: 866.26,
 symbols: {EUR: ' €', USD: ' $', NZD: ' $ NZ', SEK: ' kr', LKR: ' Rs', VND: ' ₫', CLP: ' chil. $'}
